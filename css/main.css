@@ -2,6 +2,7 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 section.board {
@@ -9,6 +10,7 @@ section.board {
     grid-template-rows: repeat(3, 10vmin);
     grid-template-columns: repeat(3, 10vmin);
     grid-gap: 0vmin;
+    margin: 0 auto;
 }
 
 div {
@@ -16,4 +18,31 @@ div {
     font-size: 8vmin;
     text-align: center;
     vertical-align: middle;
+}
+
+.ecks {
+    color: aquamarine;
+}
+
+.oh {
+    color: peru;
+}
+
+.top {
+    border-top: 0;
+}
+
+.right {
+    border-right: 0;
+}
+
+.bottom {
+    border-bottom: 0;
+}
+
+.left {
+    border-left: 0;
+}
+
+button { 
 }

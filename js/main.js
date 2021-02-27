@@ -1,23 +1,121 @@
 /*------Constants------*/
 
+const winCondition = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]
+];
 
+const colors = {
+    null: "#ccc",
+    player1: "orange",
+    player2: "green"
+}
 
 /*------Variables (state)------*/
+
+let playerTurn = 1;
+let winner;
+let boardState = [];
+
 
 // Variables might include (board/turn/winner)
 
 /*------Cached Element References------*/
 
+const board = document.querySelector('section.board');
+const squares = board.children;
+const message = document.getElementById('message');
+const replay = document.getElementById('replayButton');
+
 // You might choose to put your game status here
 
 /*------Event Listeners------*/
 
+board.onclick = function (e) {
+    square = e.target;
+    squareNum = square.id[2];
+    if (!winner && boardState[squareNum] === null) {
+        boardState[squareNum] = playerTurn;
+        checkForWin();
+        playerTurn *= -1;
+        render();
+    }
+}
+
+replay.onclick = function() {
+    reset();
+    render();
+}
 // This is where you should put the event listener
 // for a mouse-click
 
 /*------Functions------*/
 
+function init() {
+    reset();
+    render();
+}
 
+function reset() {
+    for(let i = 0; i < 9; i++) {
+        boardState[i] = null;
+    }
+    playerTurn = 1;
+    winner = null;
+}
+
+function render() {
+    for (let s in boardState) {
+        if (boardState[s] === 1) {
+            squares[s].innerText = "X";
+        }
+        else if (boardState[s] === -1) {
+            squares[s].innerText = "O";
+        }
+        else if (boardState[s] === null) {
+            squares[s].innerText = "";
+        }
+    }
+    if (!winner) {
+        if (playerTurn === 1) {
+            message.innerText = "Player X's Turn";
+        } else {
+            message.innerText = "Player O's Turn";
+        }
+    } else if (winner === "T") {
+        message.innerText = "It's a Draw!";
+    } else {
+        if (winner === 1) {
+            message.innerText = "Player X Wins!";
+        } else if (winner === -1) {
+            message.innerText = "Player O Wins!"
+        }
+    }
+}
+
+function checkForWin() {
+    for (let triplet of winCondition) {
+        if (triplet.every( n => boardState[n] === 1 )) {
+            winner = 1;
+        }
+        else if (triplet.every( n => boardState[n] === -1)) {
+            winner = -1;
+        }
+    }
+    if (!boardState.includes(null)) {
+        winner = "T";
+    }
+}
+
+
+
+init();
 // Some functions you might choose to use:
 
 // Initialization function:
