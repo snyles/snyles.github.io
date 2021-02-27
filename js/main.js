@@ -19,7 +19,7 @@ const colors = {
 
 /*------Variables (state)------*/
 
-let playerTurn = 1;
+let playerTurn;
 let winner;
 let boardState = [];
 
@@ -58,7 +58,11 @@ replay.onclick = function() {
 /*------Functions------*/
 
 function init() {
-    reset();
+    for(let i = 0; i < 9; i++) {
+        boardState[i] = null;
+    }
+    playerTurn = 1;
+    winner = null;
     render();
 }
 
@@ -101,11 +105,21 @@ function render() {
 
 function checkForWin() {
     for (let triplet of winCondition) {
-        if (triplet.every( n => boardState[n] === 1 )) {
-            winner = 1;
+        // if (triplet.every( n => boardState[n] === 1 )) {
+        //     winner = 1;
+        // }
+        // else if (triplet.every( n => boardState[n] === -1)) {
+        //     winner = -1;
+        // }
+
+        let sum = 0;
+        for (let i of triplet) {
+            sum += boardState[i];
         }
-        else if (triplet.every( n => boardState[n] === -1)) {
-            winner = -1;
+        console.log(sum);
+        if (Math.abs(sum) === 3) {
+            winner = boardState[triplet[0]];
+            return;
         }
     }
     if (!boardState.includes(null)) {
