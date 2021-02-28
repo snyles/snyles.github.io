@@ -1,31 +1,65 @@
+@font-face {
+    font-family: "Edo";
+    src: url("/media/edosz.ttf");
+}
+
 body {
     height: 100vh;
     display: flex;
     flex-direction: column;
     text-align: center;
+    color: #eee;
+    background: #aaa;
+    background-image: url('/img/bamboo_bg.jpg');
+    background-position: center;
+    background-size: cover;
+    font-family: "Edo";
+    
 }
 
 section.board {
     display: grid;
-    grid-template-rows: repeat(3, 10vmin);
-    grid-template-columns: repeat(3, 10vmin);
+    grid-template-rows: repeat(3, 15vmin);
+    grid-template-columns: repeat(3, 15vmin);
     grid-gap: 0vmin;
     margin: 0 auto;
 }
 
-div {
-    border: 3px solid black;
-    font-size: 8vmin;
+section div {
+    border: 5px solid rgba(123, 45, 38, .8);
+    font-size: 12vmin;
     text-align: center;
     vertical-align: middle;
 }
 
-.ecks {
-    color: aquamarine;
+section span.ecks {
+    color: rgba(62, 80, 91, 1);
+    text-shadow: rgb(206, 225, 242) 5px 5px;
+}
+section span.oh {
+    color: rgb(206, 225, 242);
+    text-shadow: rgba(62, 80, 91, 1) 5px 5px;
 }
 
-.oh {
-    color: peru;
+section div:hover {
+    background-color:rgba(206, 225, 242, .5)
+}
+
+h1 {
+    margin: 3vmin 0 0 0;
+    font-family: "Edo";
+    font-size: 12vmin;
+    /* color: rgb(206, 225, 242);
+    text-shadow:rgba(62, 80, 91, 1) 5px 5px;  */
+    color: rgba(62, 80, 91, 1); 
+    text-shadow: rgb(206, 225, 242) 5px 5px;
+}
+
+h2 {
+    margin: 2vmin;
+    font-size: 5vmin;
+    color: rgba(241, 228, 232, 1);
+    text-shadow:rgba(123, 45, 38, 1) 2px 2px;
 }
 
 .top {
@@ -44,5 +78,22 @@ div {
     border-left: 0;
 }
 
-button { 
+#replayButton {
+    background-color: rgba(158, 101, 87, 1);
+    border: 0;
+    padding: 15px 25px;
+    border-radius: 10px;
+    color:rgba(241, 228, 232, 1);
+    font-family: "Edo";
+    font-size: 3vmin;
+}
+#replayButton:hover {
+    color: rgb(206, 225, 242);
+}
+#replayButton:active {
+    background-color:rgba(123, 45, 38, 1);
+}
+
+p {
+    margin: 2vmin 0 0 0
 }

@@ -23,9 +23,6 @@ let playerTurn;
 let winner;
 let boardState = [];
 
-
-// Variables might include (board/turn/winner)
-
 /*------Cached Element References------*/
 
 const board = document.querySelector('section.board');
@@ -33,13 +30,11 @@ const squares = board.children;
 const message = document.getElementById('message');
 const replay = document.getElementById('replayButton');
 
-// You might choose to put your game status here
 
 /*------Event Listeners------*/
 
 board.onclick = function (e) {
-    square = e.target;
-    squareNum = square.id[2];
+    let squareNum = e.target.id[2];
     if (!winner && boardState[squareNum] === null) {
         boardState[squareNum] = playerTurn;
         checkForWin();
@@ -52,8 +47,6 @@ replay.onclick = function() {
     reset();
     render();
 }
-// This is where you should put the event listener
-// for a mouse-click
 
 /*------Functions------*/
 
@@ -77,13 +70,13 @@ function reset() {
 function render() {
     for (let s in boardState) {
         if (boardState[s] === 1) {
-            squares[s].innerText = "X";
+            squares[s].innerHTML = '<span class="ecks">X</span>';
         }
         else if (boardState[s] === -1) {
-            squares[s].innerText = "O";
+            squares[s].innerHTML = '<span class="oh">O</span>';
         }
         else if (boardState[s] === null) {
-            squares[s].innerText = "";
+            squares[s].innerHTML = ''
         }
     }
     if (!winner) {
@@ -130,24 +123,3 @@ function checkForWin() {
 
 
 init();
-// Some functions you might choose to use:
-
-// Initialization function:
-// Where you set your initial state, setting up 
-// what the board will look like upon loading
-
-// On-Click function:
-// Set up what happens when one of the elements
-// is clicked
-
-
-// Check winner function:
-// Checks the current state of the board for
-// a winner and changes the state of the winner
-// variable if so
-
-
-// Render function:
-// Displays the current state of the board
-// on the page, updating the elements to reflect
-// either X or O depending on whose turn it is
