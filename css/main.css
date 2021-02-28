@@ -33,23 +33,15 @@ section div {
 }
 
 section .ecks {
-    /* color: rgba(62, 80, 91, 1); */
-    /* text-shadow: rgb(206, 225, 242) 2px 2px 2px; */
-    /* color: #DCE5DD; */
-    color: rgba(0, 0, 0, 1);
-    /* text-shadow: rgba(62, 80, 91, 1) 2px 2px 2px; */
+    color: rgba(50, 50, 50, 1);
     display: inline-block;
 }
 section .oh {
-    /* color: rgb(206, 225, 242); */
-    /* color:rgba(241, 228, 232, 1); */
-    color: rgba(255, 255, 255, 1);
-    /* text-shadow: rgba(62, 80, 91, 1) 2px 2px 2px; */
+    color: rgba(225, 225, 225, 1);
     display: inline-block;
 }
 
 section div:hover {
-    /* background-color:rgba(206, 225, 242, .3) */
     background-color:rgba(225, 225, 225, .3);
 }
 
@@ -96,6 +88,7 @@ h2 {
     color: rgba(62, 80, 91, 1);
     font-family: "Edo";
     font-size: 3vmin;
+    transition: color 0.3s;
 }
 #replayButton:hover {
     color: rgba(241, 228, 232, 1);

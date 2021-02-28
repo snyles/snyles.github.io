@@ -11,6 +11,9 @@ const winCondition = [
     [2,4,6]
 ];
 
+const bell1 = new Audio("./media/bell1.wav");
+const bell2 = new Audio("./media/bell2.wav");
+
 /*------Variables (state)------*/
 
 let playerTurn;
@@ -111,8 +114,8 @@ function checkForWin() {
 function animateTitle() {
     for (let i in titleSpans) {
         setInterval( function () {
-            titleSpans[i].className = "animate__animated animate__bounceInDown";
-        }, 350 * i)
+            titleSpans[i].className = "animate__animated animate__slideInDown";
+        }, 300 * i)
     }
 }
 
