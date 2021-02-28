@@ -29,7 +29,7 @@ const titleSpans = title.children;
 
 /*------Event Listeners------*/
 
-board.onclick = function (e) {
+board.addEventListener('click', function (e) {
     let squareNum = e.target.id[2];
     if (!winner && boardState[squareNum] === null) {
         boardState[squareNum] = playerTurn;
@@ -37,22 +37,14 @@ board.onclick = function (e) {
         playerTurn *= -1;
         render();
     }
-}
+});
 
-replay.onclick = function() {
-    reset();
-    render();
-}
+replay.addEventListener('click', reset);
 
 /*------Functions------*/
 
 function init() {
-    for(let i = 0; i < 9; i++) {
-        boardState[i] = null;
-    }
-    playerTurn = 1;
-    winner = null;
-    render();
+    reset();
     animateTitle();
 }
 
@@ -62,9 +54,11 @@ function reset() {
     }
     playerTurn = 1;
     winner = null;
+    render();
 }
 
 function render() {
+    //draw board
     for (let s in boardState) {
         if (boardState[s] === 1 && !squares[s].innerHTML) {
             squares[s].innerHTML = '<span class="ecks animate__animated animate__fadeIn">X</span>';
@@ -77,6 +71,7 @@ function render() {
         }
     }
    
+    //change message
     if (!winner) {
         if (playerTurn === 1) {
             message.innerText = "Player X's Turn";
@@ -93,19 +88,12 @@ function render() {
         } else if (winner === -1) {
             message.innerText = "Player O Wins!"
         }
-        animateMessage('rubberBand', 1000);
+        animateMessage('tada', 1000);
     }
 }
 
 function checkForWin() {
     for (let triplet of winCondition) {
-        // if (triplet.every( n => boardState[n] === 1 )) {
-        //     winner = 1;
-        // }
-        // else if (triplet.every( n => boardState[n] === -1)) {
-        //     winner = -1;
-        // }
-
         let sum = 0;
         for (let i of triplet) {
             sum += boardState[i];
@@ -134,12 +122,5 @@ function animateMessage(anim, t) {
         message.classList.remove(`animate__${anim}`);
     }, (t || 500));
 }
-
-// function removeAnimation(target, anim, time) {
-//     setTimeout(function() {
-//         target.classList.remove('animate__animated');
-//         target.classList.remove(`animate__${anim}`);
-//     }, (time || 1000));
-// }
 
 init();
