@@ -11,12 +11,6 @@ const winCondition = [
     [2,4,6]
 ];
 
-const colors = {
-    null: "#ccc",
-    player1: "orange",
-    player2: "green"
-}
-
 /*------Variables (state)------*/
 
 let playerTurn;
@@ -30,6 +24,8 @@ const squares = board.children;
 const message = document.getElementById('message');
 const replay = document.getElementById('replayButton');
 
+const title = document.querySelector('h1');
+const titleSpans = title.children;
 
 /*------Event Listeners------*/
 
@@ -57,6 +53,7 @@ function init() {
     playerTurn = 1;
     winner = null;
     render();
+    animateTitle();
 }
 
 function reset() {
@@ -69,30 +66,34 @@ function reset() {
 
 function render() {
     for (let s in boardState) {
-        if (boardState[s] === 1) {
-            squares[s].innerHTML = '<span class="ecks">X</span>';
+        if (boardState[s] === 1 && !squares[s].innerHTML) {
+            squares[s].innerHTML = '<span class="ecks animate__animated animate__fadeIn">X</span>';
         }
-        else if (boardState[s] === -1) {
-            squares[s].innerHTML = '<span class="oh">O</span>';
+        else if (boardState[s] === -1 && !squares[s].innerHTML) {
+            squares[s].innerHTML = '<span class="oh animate__animated animate__fadeIn">O</span>';
         }
         else if (boardState[s] === null) {
             squares[s].innerHTML = ''
         }
     }
+   
     if (!winner) {
         if (playerTurn === 1) {
             message.innerText = "Player X's Turn";
         } else {
             message.innerText = "Player O's Turn";
         }
+        animateMessage('headShake');
     } else if (winner === "T") {
         message.innerText = "It's a Draw!";
+        animateMessage('swing', 1000);
     } else {
         if (winner === 1) {
             message.innerText = "Player X Wins!";
         } else if (winner === -1) {
             message.innerText = "Player O Wins!"
         }
+        animateMessage('rubberBand', 1000);
     }
 }
 
@@ -109,7 +110,6 @@ function checkForWin() {
         for (let i of triplet) {
             sum += boardState[i];
         }
-        console.log(sum);
         if (Math.abs(sum) === 3) {
             winner = boardState[triplet[0]];
             return;
@@ -120,6 +120,26 @@ function checkForWin() {
     }
 }
 
+function animateTitle() {
+    for (let i in titleSpans) {
+        setInterval( function () {
+            titleSpans[i].className = "animate__animated animate__bounceInDown";
+        }, 350 * i)
+    }
+}
 
+function animateMessage(anim, t) {
+    message.classList.add(`animate__${anim}`);
+    setTimeout(function() {
+        message.classList.remove(`animate__${anim}`);
+    }, (t || 500));
+}
+
+// function removeAnimation(target, anim, time) {
+//     setTimeout(function() {
+//         target.classList.remove('animate__animated');
+//         target.classList.remove(`animate__${anim}`);
+//     }, (time || 1000));
+// }
 
 init();
