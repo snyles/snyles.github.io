@@ -31,6 +31,7 @@ section div {
     font-size: 13vmin;
     text-align: center;
     vertical-align: middle;
+    transition: background-color .5s;
 }
 
 section .ecks {
@@ -42,7 +43,7 @@ section .oh {
     display: inline-block;
 }
 
-section div:hover {
+section div:hover, .highlight {
     background-color:rgba(225, 225, 225, .3);
 }
 

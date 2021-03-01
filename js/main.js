@@ -17,6 +17,7 @@ let playerTurn;
 let wentFirst;
 let winner;
 let boardState = [];
+let winTriplet;
 
 /*------Cached Element References------*/
 
@@ -30,10 +31,10 @@ const titleSpans = title.children;
 /*------Event Listeners------*/
 
 board.addEventListener('click', function (e) {
-    let squareNum = e.target.id[2];
+    let squareNum = parseInt(e.target.id[2]);
     if (!winner && boardState[squareNum] === null) {
         boardState[squareNum] = playerTurn;
-        checkForWin();
+        winTriplet = checkForWin();
         playerTurn *= -1;
         render();
     }
@@ -58,6 +59,12 @@ function reset() {
     fadeOutSquares();
     for(let i = 0; i < 9; i++) {
         boardState[i] = null;
+    }
+    if (winTriplet) {
+        for (let y of winTriplet) {
+            squares[y].classList.remove('highlight');
+        }
+    winTriplet = null;
     }
     wentFirst *= -1;
     playerTurn = wentFirst;
@@ -98,6 +105,11 @@ function render() {
         }
         animateMessage('tada', 1000);
     }
+    if(winTriplet) {
+        for (let i of winTriplet) {
+            squares[i].classList.add('highlight');
+        }
+    }
 }
 
 function checkForWin() {
@@ -108,12 +120,13 @@ function checkForWin() {
         }
         if (Math.abs(sum) === 3) {
             winner = boardState[triplet[0]];
-            return;
+            return triplet;
         }
     }
     if (!boardState.includes(null)) {
         winner = "T";
     }
+    return null;
 }
 
 function animateTitle() {
