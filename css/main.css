@@ -9,7 +9,7 @@ body {
     flex-direction: column;
     text-align: center;
     color: #eee;
-    background: #aaa;
+    background: #1f4663;
     background-image: url('/img/mountain_bg.jpg');
     background-position: center top;
     background-size: cover;
@@ -28,10 +28,14 @@ section.board {
 
 section div {
     border: 2px solid rgba(123, 45, 38, .9);
-    font-size: 13vmin;
-    text-align: center;
-    vertical-align: middle;
+    font-size: 14vmin;
+    /* text-align: center;
+    vertical-align: middle; */
     transition: background-color .5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 section .ecks {

@@ -128,7 +128,7 @@ function checkForWin() {
 
 function animateTitle() {
     for (let i in titleSpans) {
-        setInterval( function () {
+        setTimeout( function () {
             titleSpans[i].className = "animate__animated animate__slideInDown";
         }, 400 * i)
     }
