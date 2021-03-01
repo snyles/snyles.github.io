@@ -11,8 +11,6 @@ const winCondition = [
     [2,4,6]
 ];
 
-const bell1 = new Audio("./media/bell1.wav");
-const bell2 = new Audio("./media/bell2.wav");
 
 /*------Variables (state)------*/
 
@@ -47,11 +45,17 @@ replay.addEventListener('click', reset);
 /*------Functions------*/
 
 function init() {
-    reset();
+    for(let i = 0; i < 9; i++) {
+        boardState[i] = null;
+    }
+    playerTurn = 1;
+    winner = null;
+    render();
     animateTitle();
 }
 
 function reset() {
+    fadeOutSquares();
     for(let i = 0; i < 9; i++) {
         boardState[i] = null;
     }
@@ -69,9 +73,9 @@ function render() {
         else if (boardState[s] === -1 && !squares[s].innerHTML) {
             squares[s].innerHTML = '<span class="oh animate__animated animate__fadeIn">O</span>';
         }
-        else if (boardState[s] === null) {
-            squares[s].innerHTML = ''
-        }
+        // else if (boardState[s] === null) {
+        //     squares[s].innerHTML = ''; 
+        // }
     }
    
     //change message
@@ -81,7 +85,7 @@ function render() {
         } else {
             message.innerText = "Player O's Turn";
         }
-        animateMessage('headShake');
+        animateMessage('pulse', 1000);
     } else if (winner === "T") {
         message.innerText = "It's a Draw!";
         animateMessage('swing', 1000);
@@ -115,7 +119,7 @@ function animateTitle() {
     for (let i in titleSpans) {
         setInterval( function () {
             titleSpans[i].className = "animate__animated animate__slideInDown";
-        }, 300 * i)
+        }, 350 * i)
     }
 }
 
@@ -124,6 +128,23 @@ function animateMessage(anim, t) {
     setTimeout(function() {
         message.classList.remove(`animate__${anim}`);
     }, (t || 500));
+}
+
+function fadeOutSquares() {
+    let ecks = document.querySelectorAll('.ecks');
+    let ohs = document.querySelectorAll('.oh');
+    for (let x of ecks) {
+        x.className = "ecks animate__animated animate__fadeOut";
+        setTimeout(function() {
+            x.parentElement.innerHTML = '';
+        }, 1000);
+    }
+    for (let o of ohs) {
+        o.className = "oh animate__animated animate__fadeOut";
+        setTimeout(function() {
+            o.parentElement.innerHTML = '';
+        }, 1000);
+    }
 }
 
 init();

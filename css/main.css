@@ -14,6 +14,7 @@ body {
     background-position: center top;
     background-size: cover;
     font-family: "Edo";
+    overflow: hidden;
     
 }
 
@@ -33,11 +34,11 @@ section div {
 }
 
 section .ecks {
-    color: rgba(50, 50, 50, 1);
+    color: rgba(60, 60, 60, 1);
     display: inline-block;
 }
 section .oh {
-    color: rgba(225, 225, 225, 1);
+    color: rgba(235, 235, 235, 1);
     display: inline-block;
 }
 
