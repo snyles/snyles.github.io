@@ -120,7 +120,7 @@ function animateTitle() {
     for (let i in titleSpans) {
         setInterval( function () {
             titleSpans[i].className = "animate__animated animate__slideInDown";
-        }, 500 * i)
+        }, 400 * i)
     }
 }
 
