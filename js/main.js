@@ -45,6 +45,7 @@ replay.addEventListener('click', reset);
 /*------Functions------*/
 
 function init() {
+    animateTitle();
     for(let i = 0; i < 9; i++) {
         boardState[i] = null;
     }
@@ -52,19 +53,18 @@ function init() {
     wentFirst = 1;
     winner = null;
     render();
-    animateTitle();
 }
 
 function reset() {
     fadeOutSquares();
-    for(let i = 0; i < 9; i++) {
-        boardState[i] = null;
-    }
     if (winTriplet) {
         for (let y of winTriplet) {
             squares[y].classList.remove('highlight');
         }
     winTriplet = null;
+    }
+    for(let i = 0; i < 9; i++) {
+        boardState[i] = null;
     }
     wentFirst *= -1;
     playerTurn = wentFirst;
@@ -81,9 +81,6 @@ function render() {
         else if (boardState[s] === -1 && !squares[s].innerHTML) {
             squares[s].innerHTML = '<span class="oh animate__animated animate__fadeIn">O</span>';
         }
-        // else if (boardState[s] === null) {
-        //     squares[s].innerHTML = ''; 
-        // }
     }
    
     //change message
