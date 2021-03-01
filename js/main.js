@@ -11,10 +11,10 @@ const winCondition = [
     [2,4,6]
 ];
 
-
 /*------Variables (state)------*/
 
 let playerTurn;
+let wentFirst;
 let winner;
 let boardState = [];
 
@@ -24,7 +24,6 @@ const board = document.querySelector('section.board');
 const squares = board.children;
 const message = document.getElementById('message');
 const replay = document.getElementById('replayButton');
-
 const title = document.querySelector('h1');
 const titleSpans = title.children;
 
@@ -49,6 +48,7 @@ function init() {
         boardState[i] = null;
     }
     playerTurn = 1;
+    wentFirst = 1;
     winner = null;
     render();
     animateTitle();
@@ -59,7 +59,8 @@ function reset() {
     for(let i = 0; i < 9; i++) {
         boardState[i] = null;
     }
-    playerTurn = 1;
+    wentFirst *= -1;
+    playerTurn = wentFirst;
     winner = null;
     render();
 }
@@ -119,7 +120,7 @@ function animateTitle() {
     for (let i in titleSpans) {
         setInterval( function () {
             titleSpans[i].className = "animate__animated animate__slideInDown";
-        }, 350 * i)
+        }, 500 * i)
     }
 }
 
