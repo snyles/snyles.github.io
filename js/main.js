@@ -61,7 +61,7 @@ function reset() {
         for (let y of winTriplet) {
             squares[y].classList.remove('highlight');
         }
-    winTriplet = null;
+        winTriplet = null;
     }
     for(let i = 0; i < 9; i++) {
         boardState[i] = null;
@@ -102,6 +102,8 @@ function render() {
         }
         animateMessage('tada', 1000);
     }
+
+    //highlight win squares
     if(winTriplet) {
         for (let i of winTriplet) {
             squares[i].classList.add('highlight');
